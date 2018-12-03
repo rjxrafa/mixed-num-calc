@@ -21,7 +21,7 @@ When the program starts, an appropriate message should appear that describes the
 
 Reverse Polish Notation is a way of expressing arithmetic expressions that avoids the use of brackets to define priorities for evaluation of operators. In ordinary notation, one might write
 
-(3 + 5) * (7 - 2)
+> (3 + 5) * (7 - 2)
 
 and the brackets tell us that we have to add 3 to 5, and then subtract 2 from 7, and multiply the two results together. In RPN, the numbers and operators are listed one after another, and an operator always acts on the most recent numbers in the list. The numbers can be thought of as forming a stack, like a pile of plates. The most recent number goes on the top of the stack. An operator takes the appropriate number of arguments from the top of the stack and replaces them by the result of the operation.
 
