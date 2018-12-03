@@ -5,6 +5,9 @@ using namespace std;
 
 int main()
 {
-    cout << "Hello World!" << endl;
+    Parser a;
+
+    cout << "Output: " << a.parse("3/2 + 5.2 + 5/2 - 3/1") << endl;
+
     return 0;
 }
