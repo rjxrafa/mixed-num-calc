@@ -27,7 +27,7 @@ std::string Parser::parse(const std::string userInput)
     {
         in >> temp;
         if (debug) {std::cout << temp << std::endl;}
-        if (isdigit(temp[0]))
+        if (isdigit(temp[0])) // *BUG*: Will be unable to take in decimals that start with . (e.g. .5)
         {
             ss << temp;
             ss >> tempMixed;
@@ -41,10 +41,10 @@ std::string Parser::parse(const std::string userInput)
         }
     }
 
-    return showNumberQueue()+showOperatorStack();
+    return outputNumberQueue()+outputOperatorStack();
 }
 
-std::string Parser::showNumberQueue()
+std::string Parser::outputNumberQueue()
 {
     std::queue<mixedNumber> temp;
     std::stringstream ss;
@@ -60,7 +60,7 @@ std::string Parser::showNumberQueue()
     return tempstr;
 }
 
-std::string Parser::showOperatorStack()
+std::string Parser::outputOperatorStack()
 {
     std::stack<char> temp;
     std::stringstream ss;

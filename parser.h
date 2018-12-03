@@ -10,20 +10,21 @@ class Parser
 {
     public:
         Parser();
-        Parser(const Parser& other);
+        Parser(const Parser& other); // potentially unneeded
         ~Parser();
         std::string parse(const std::string userInput);
-        std::string showNumberQueue();
-        std::string showOperatorStack();
+        std::string outputNumberQueue();
+        std::string outputOperatorStack();
 
         friend
-        std::istream& operator>>(std::istream &in, std::string& infixExpression);
+        void operator>>(Parser &p, std::string& infixExpression);
         friend
-        std::istream& operator<<(std::istream &in, std::string& infixExpression);
+        void operator<<(Parser &p, std::string& infixExpression);
 
     private:
         std::stack<char> operators;
         std::queue<mixedNumber> output;
+        std::string storedExpression;
 
 };
 

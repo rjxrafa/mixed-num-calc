@@ -1,0 +1,1 @@
+- if (isdigit(temp[0])) // *BUG*: Will be unable to take in decimals that start with . (e.g. .5)

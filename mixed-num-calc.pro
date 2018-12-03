@@ -14,7 +14,8 @@ SOURCES += \
 
 DISTFILES += \
     README.md \
-    .gitignore
+    .gitignore \
+    knownBugs.md
 
 HEADERS += \
     fraction.h \
