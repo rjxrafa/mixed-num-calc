@@ -15,16 +15,18 @@ class Parser
         std::string parse(const std::string userInput);
         std::string outputNumberQueue();
         std::string outputOperatorStack();
+        int precedence(char token);
+        bool isOp(char token);
 
         friend
         void operator>>(Parser &p, std::string& infixExpression);
         friend
-        void operator<<(Parser &p, std::string& infixExpression);
+        void operator<<(Parser &p, std::string& postfixExpression);
 
     private:
         std::stack<char> operators;
         std::queue<mixedNumber> output;
-        std::string storedExpression;
+        std::string storedExpression = "";
 
 };
 

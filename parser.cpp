@@ -22,6 +22,9 @@ std::string Parser::parse(const std::string userInput)
     mixedNumber tempMixed;
     bool debug = true;
 
+    //quick and dirty shunting yard, let's make this
+    //nicer lol
+
     if (debug) {std::cout << "Parsing string: " << userInput << std::endl;}
     while (!in.eof())
     {
@@ -31,47 +34,129 @@ std::string Parser::parse(const std::string userInput)
         {
             ss << temp;
             ss >> tempMixed;
+
+            ss << tempMixed;
+            getline(ss,temp);
             ss.clear();
-            output.push(tempMixed);
+
+            storedExpression += temp;
+            storedExpression += " ";
+
         }
-        else
+        else if (isOp(temp[0]))
         {
-            ss << temp;
-            operators.push(ss.get());
+            //for -2.
+            //repeat of top, gotta clean this
+            if(isdigit(temp[1]))
+            {
+                ss << temp;
+                ss >> tempMixed;
+
+                ss << tempMixed;
+                getline(ss,temp);
+                ss.clear();
+
+                storedExpression += temp;
+                storedExpression += " ";
+            }
+            else
+            {
+                ss << temp;
+                if(operators.empty())
+                    operators.push(ss.get());
+                else
+                {
+                    while(operators.top() != '(' && precedence(operators.top()) > precedence(temp[0]) && !(operators.empty()))
+                    {
+                        storedExpression += operators.top();
+                        storedExpression += " ";
+                        operators.pop();
+                    }
+                    operators.push(ss.get());
+                }
+                ss.clear();
+            }
+        }
+        else if(temp[0] == '(')
+        {
+            operators.push(temp[0]);
+        }
+        else if(temp[0] == ')')
+        {
+            while(!operators.empty() && operators.top() != '(')
+            {
+                storedExpression += operators.top();
+                storedExpression += " ";
+                operators.pop();
+            }
+            if (!operators.empty())
+            {
+                operators.pop();
+            }
         }
     }
-
-    return outputNumberQueue()+outputOperatorStack();
-}
-
-std::string Parser::outputNumberQueue()
-{
-    std::queue<mixedNumber> temp;
-    std::stringstream ss;
-    std::string tempstr;
-    while (!output.empty())
+    while(!(operators.empty()))
     {
-        ss << output.front() << " " ;
-        temp.push(output.front());
-        output.pop();
-    }
-    output = temp;
-    getline(ss, tempstr);
-    return tempstr;
-}
+        storedExpression += operators.top();
+        storedExpression += " ";
 
-std::string Parser::outputOperatorStack()
-{
-    std::stack<char> temp;
-    std::stringstream ss;
-    std::string tempstr;
-    while (!operators.empty())
-    {
-        ss << operators.top()<< " ";
-        temp.push(operators.top());
         operators.pop();
     }
-    operators = temp;
-    getline(ss,tempstr);
-    return tempstr;
+
+    return storedExpression;/*outputNumberQueue()+outputOperatorStack()*/;
+}
+
+//std::string Parser::outputNumberQueue()
+//{
+//    std::queue<mixedNumber> temp;
+//    std::stringstream ss;
+//    std::string tempstr;
+//    while (!output.empty())
+//    {
+//        ss << output.front() << " " ;
+//        temp.push(output.front());
+//        output.pop();
+//    }
+//    output = temp;
+//    getline(ss, tempstr);
+//    return tempstr;
+//}
+
+//std::string Parser::outputOperatorStack()
+//{
+//    std::stack<char> temp;
+//    std::stringstream ss;
+//    std::string tempstr;
+//    while (!operators.empty())
+//    {
+//        ss << operators.top()<< " ";
+//        temp.push(operators.top());
+//        operators.pop();
+//    }
+//    operators = temp;
+//    getline(ss,tempstr);
+//    return tempstr;
+//}
+
+int Parser::precedence(char token)
+{
+    switch(token)
+    {
+        case '/':
+            return 3;
+        case '*':
+            return 3;
+        case '+':
+            return 2;
+        case '-':
+            return 2;
+    }
+}
+
+bool Parser::isOp(char token)
+{
+    if(token == '/' || token == '*' || token == '+' || token == '-')
+        return true;
+    else
+        return false;
 }
