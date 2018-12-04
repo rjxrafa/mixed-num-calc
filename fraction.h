@@ -38,7 +38,7 @@ class fraction
         fraction squareRoot() const;
 
         friend
-        std::ostream& operator<<(std::ostream& out, const fraction &frac);
+        std::ostream &operator<<(std::ostream &out, const fraction &frac);
 
         friend
         std::istream& operator>>(std::istream& out, fraction &frac);

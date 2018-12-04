@@ -10,7 +10,9 @@ SOURCES += \
     mixednumber.cpp \
     mixednumberfriend.cpp \
     parser.cpp \
-    parserfriend.cpp
+    parserfriend.cpp \
+    token.cpp \
+    tokenfriend.cpp
 
 DISTFILES += \
     README.md \
@@ -20,4 +22,5 @@ DISTFILES += \
 HEADERS += \
     fraction.h \
     mixednumber.h \
-    parser.h
+    parser.h \
+    token.h

@@ -17,7 +17,6 @@ std::istream& operator>>( std::istream &in, mixedNumber &m)
 { // Need to add cin logic? // need to add getline logic?
     fraction temp_whole, temp_mixed;
 
-    char junk;
     std::stringstream ss;
     std::string possibleMixed;
     if(&in == &std::cin) //This means that the program is reading from the console
