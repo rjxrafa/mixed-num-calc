@@ -155,8 +155,14 @@ int Parser::precedence(char token)
 
 bool Parser::isOp(char token)
 {
-    if(token == '/' || token == '*' || token == '+' || token == '-')
+    switch(token)
+    {
+    case '/':
+    case '*':
+    case '+':
+    case '-':
         return true;
-    else
+    default:
         return false;
+    }
 }
