@@ -11,25 +11,25 @@ int main()
 //    string temp = "3 3 3";
 //    string output;
 
-    while (1)
-    {
-        try
-        {
-            Token a;
-            string temp;
-            cin >> temp;
-            std::stringstream ss(temp);
-            ss >> a;
-            cin.clear();
-            cout << "\nVal: " << a.getValue()
-                 << "\nType:" << a.getType()
-                 << "\nString:" << a.getString()
-                 << endl;
-        } catch (...)
-        {
-            cout << "\nAn unknown error has occured.\n";
-        }
-    }
+//    while (1)
+//    {
+//        try
+//        {
+//            Token a;
+//            string temp;
+//            getline(cin,temp);
+//            std::stringstream ss(temp);
+//            ss >> a;
+//            cin.clear();
+//            cout << "\nVal: " << a.getValue()
+//                 << "\nType:" << a.getType()
+//                 << "\nString:" << a.getString()
+//                 << endl;
+//        } catch (...)
+//        {
+//            cout << "\nAn unknown error has occured.\n";
+//        }
+//    }
 
 //    std::regex m ("((\\+|\\-)?(\\d+)((\\/\\d+)|(\\.\\d+)|( \\d+/\\d+))?)"); // MixedNum search
 //    std::smatch matches;
@@ -75,8 +75,17 @@ int main()
 //    cout << std::endl << std::boolalpha << temp << ": "<< (std::regex_match(temp, matches, m)) ? true : false;
 //    temp = "55/55";
 //    cout << std::endl << std::boolalpha << temp << ": "<< (std::regex_match(temp, matches, m)) ? true : false;
-
-
-
+    while(1)
+    {
+        try {
+            cout << "\nPlease enter a desired expression:" << endl;
+            string temp;
+            getline(cin,temp);
+            Parser a;
+            a << temp;
+        } catch (...) {
+            cout << "\nAn unknown error has occured.";
+        }
+    }
     return 0;
 }

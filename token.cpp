@@ -18,12 +18,29 @@ void Token::setValue(const mixedNumber &m)
     val  = m;
 }
 
-mixedNumber Token::getValue()
+void Token::checkPrecedence()
+{
+    switch(out[0])
+    {
+        case '/':
+        case '*':
+            precedence =  3;
+            break;
+        case '+':
+        case '-':
+            precedence =  2;
+            break;
+        default:
+            break;
+    }
+}
+
+mixedNumber Token::getValue() const
 {
     return val;
 }
 
-std::string Token::getString()
+std::string Token::getString() const
 {
     return out;
 }
@@ -31,4 +48,9 @@ std::string Token::getString()
 Type Token::getType()
 {
     return type;
+}
+
+int Token::getPrecedence() const
+{
+    return precedence;
 }

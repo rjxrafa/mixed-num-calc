@@ -13,15 +13,20 @@ public:
     ~Token();
 
     void setValue(const mixedNumber &m);
+    void checkPrecedence();
 
-    mixedNumber getValue();
-    std::string getString();
+    mixedNumber getValue() const;
+    std::string getString() const;
+    int getPrecedence() const;
+
     Type getType();
 
     friend
     bool operator>>(std::istream &in, Token &t);
     friend
-    bool operator>>(std::string, Token &t);
+    bool operator>>(std::string &s, Token &t);
+    friend
+    std::ostream &operator<<(std::ostream &out, Token& t);
 
     friend
     std::ostream & operator<<(std::ostream &out, const Token &t);

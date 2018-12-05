@@ -1,6 +1,7 @@
 #ifndef PARSER_H
 #define PARSER_H
 #include "mixednumber.h"
+#include "token.h"
 #include <stack>
 #include <queue>
 
@@ -21,12 +22,14 @@ class Parser
         friend
         void operator>>(Parser &p, std::string& infixExpression);
         friend
-        void operator<<(Parser &p, std::string& postfixExpression);
+        void operator<<(Parser &p, std::string& infixExpression);
 
     private:
         std::stack<char> operators;
         std::queue<mixedNumber> output;
         std::string storedExpression = "";
+        std::stack<Token> opStack;
+        std::queue<Token> tokenQ;
 
 };
 
