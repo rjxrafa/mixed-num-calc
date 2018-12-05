@@ -5,7 +5,7 @@ bool operator>>(std::istream &in, Token &t)
 {  // This operator will only receive one token at a time. Parser class should handle multiple tokens.
     // Usig regex, we check for a mixedNum match. Else we check for operator match.
 
-    std::regex m ("((\\+|\\-)?(\\d+)((/\\d+)|(\\.\\d+)|(\\s\\d+/\\d+))?)");
+    std::regex m ("(((\\+|\\-)?(\\d+)((/\\d+)|(\\.\\d+)|(\\s\\d+/\\d+))?)|(\\+|\\-)?(\\.\\d+))");
     //+-optional, d+ more than one digit, | allows variations
     // / for fraciton, . for decimal, s stands for whitespace, this allows us for mixed number. ? means optional
 
@@ -43,7 +43,7 @@ bool operator>>(std::istream &in, Token &t)
 
 bool operator>>(std::string &s, Token &t)
 { // This overloaded operator will allow us to build tokens from strings
-    std::regex m ("((\\+|\\-)?(\\d+)((/\\d+)|(\\.\\d+)|(\\s\\d+/\\d+))?)"); // MixedNum search
+    std::regex m ("(((\\+|\\-)?(\\d+)((/\\d+)|(\\.\\d+)|(\\s\\d+/\\d+))?)|(\\+|\\-)?(\\.\\d+))");
     std::regex o ("[-*\\+/\\(\\)]"); // Operator search
 
     // If string matches our regex, it is a fraction

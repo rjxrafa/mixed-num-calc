@@ -5,7 +5,7 @@
 #include <stack>
 #include <queue>
 
-enum parser_ERRORS {};
+enum parser_ERRORS { INVALIDEXPRESSION};
 
 class Parser
 {

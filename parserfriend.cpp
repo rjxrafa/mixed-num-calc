@@ -37,7 +37,7 @@ void operator<<(Parser &p, std::string& infixExpression)
                     //with greater precedence, pop ops onto the output queue
                     //and push temp into opstack
                     while(!p.opStack.empty() &&
-                          p.opStack.top().getPrecedence() > temp.getPrecedence()
+                          p.opStack.top().getPrecedence() >= temp.getPrecedence()
                           && p.opStack.top().getString() != "(")
                     {
                         p.tokenQ.push(p.opStack.top());
@@ -66,9 +66,9 @@ void operator<<(Parser &p, std::string& infixExpression)
                     }
                  }
             }
-            else
-                p.tokenQ.push(temp);
         }
+        else
+            throw INVALIDEXPRESSION;
     }
 
     while(!p.opStack.empty())
