@@ -3,7 +3,7 @@
 #include "mixednumber.h"
 #include <stack>
 
-enum Type { Operator, Operand, None };
+enum Type {  None, Operator, Operand };
 
 class Token
 {
@@ -20,6 +20,9 @@ public:
 
     friend
     bool operator>>(std::istream &in, Token &t);
+    friend
+    bool operator>>(std::string, Token &t);
+
     friend
     std::ostream & operator<<(std::ostream &out, const Token &t);
 

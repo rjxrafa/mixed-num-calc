@@ -5,7 +5,7 @@ bool operator>>(std::istream &in, Token &t)
 {  // This operator will only receive one token at a time. Parser class should handle multiple tokens.
     // Usig regex, we check for a mixedNum match. Else we check for operator match.
 
-    std::regex m ("((\\+|\\-)?(\\d+)((\\d+)|(\\.\\d+)|( \\d+/\\d+))?)"); // MixedNum search
+    std::regex m ("((\\+|\\-)?(\\d+)((/\\d+)|(\\.\\d+)|(\\s\\d+/\\d+))?)"); // MixedNum search
     std::smatch matches;
     std::regex o ("[-*\\+/]"); // Operator search
 
@@ -24,18 +24,7 @@ bool operator>>(std::istream &in, Token &t)
     {
         std::stringstream temp(s);
         temp >> t.out;
-
-        switch(t.out[0])
-        {
-            case '/':
-                return 3;
-            case '*':
-                return 3;
-            case '+':
-                return 2;
-            case '-':
-                return 2;
-        }
+        t.type = Operator;
     }
     else
         return false;
