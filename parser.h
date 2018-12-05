@@ -28,6 +28,7 @@ class Parser
         std::stack<char> operators;
         std::queue<mixedNumber> output;
         std::string storedExpression = "";
+
         std::stack<Token> opStack;
         std::queue<Token> tokenQ;
 

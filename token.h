@@ -3,7 +3,7 @@
 #include "mixednumber.h"
 #include <stack>
 
-enum Type {  None, Operator, Operand };
+enum Type {  None, Operator, Operand, Parenthesis };
 
 class Token
 {
@@ -13,7 +13,7 @@ public:
     ~Token();
 
     void setValue(const mixedNumber &m);
-    void checkPrecedence();
+    void setPrecedence();
 
     mixedNumber getValue() const;
     std::string getString() const;

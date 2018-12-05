@@ -18,7 +18,7 @@ void Token::setValue(const mixedNumber &m)
     val  = m;
 }
 
-void Token::checkPrecedence()
+void Token::setPrecedence()
 {
     switch(out[0])
     {
