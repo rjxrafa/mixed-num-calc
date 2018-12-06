@@ -6,6 +6,10 @@ Functionality
 - account for missing parenthtesis
 - account 3 + 3
 
+parser works with mixed in the form of fractions and integers.
+needs to work with decimals (0.5, .5) and mixed numbers (3 1/2).
+
+
 sources:
 
 https://rosettacode.org/wiki/Parsing/Shunting-yard_algorithm#C

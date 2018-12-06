@@ -16,7 +16,7 @@ public:
     void setPrecedence();
 
     mixedNumber getValue() const;
-    std::string getString() const;
+    std::string getString();
     int getPrecedence() const;
 
     Type getType();

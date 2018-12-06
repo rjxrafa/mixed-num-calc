@@ -2,7 +2,7 @@
 
 void operator>>(Parser &p, std::string& infixExpression)
 { // Extractor operator allows for extraction of stored expression into a given string.
-    bool debug = true;
+    bool debug = false;
     if (debug) {std::cout << "Stored expression: " << p.storedExpression << std::endl;}
     infixExpression = p.storedExpression;
 }
