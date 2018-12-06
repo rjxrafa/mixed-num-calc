@@ -18,7 +18,7 @@ std::string Parser::getString() const
 
 void Parser::parse(const std::string &infixExpression)
 {
-    bool debug = true;
+    bool debug = false;
     int count = 0; // Count keeps track of a token count based on type of token
     // Used for checking for mixed numbers and invalid operators
     std::stringstream ss(infixExpression);

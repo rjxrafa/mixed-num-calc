@@ -2,7 +2,7 @@
 
 void operator>>(Calculate &c, std::string& postfixExpression)
 {
-    bool debug = true;
+    bool debug = false;
     if (debug) {std::cout << "Stored expression: " << c.storedExpression << std::endl;}
 
     postfixExpression = c.storedExpression;
