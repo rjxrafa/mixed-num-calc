@@ -37,6 +37,12 @@ void operator<<(Parser &p, std::string& infixExpression)
                             || temp.getValue().getNum() < 0
                             || temp.getValue().getDenom() < 0)
                         throw INVALIDEXPRESSION;
+                    if(p.tokenQ.back().getValue() < 0)
+                    {
+                        mixedNumber fix = temp.getValue();
+                        fix *= -1;
+                        temp.setValue(fix);
+                    }
                     mixedNumber sum = p.tokenQ.back().getValue();
                     sum += temp.getValue();
                     p.tokenQ.back().setValue(sum);
