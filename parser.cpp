@@ -9,3 +9,8 @@ Parser::~Parser()
 {
 
 }
+
+std::string Parser::getString() const
+{
+    return storedExpression;
+}
