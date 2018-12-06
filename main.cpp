@@ -6,7 +6,7 @@
 using namespace std;
 
 void introduction();
-void getInput(istream& in, string inputfile, string savefile);
+void getInput(istream& in, string inputfile, string& savefile);
 void executeArguments(int argc, char*argv[]);
 void recordFile(std::string filename, std::string postfix);
 
@@ -15,11 +15,11 @@ int main(int argc, char *argv[])
 {
     introduction();
 //    executeArguments(argc, argv);
-    string savename = "", inputname = "";
+    string  inputname = "", savefile = "";
     while(1)
     {
         try {    
-            getInput(cin, inputname, savename);
+            getInput(cin, inputname, savefile);
         }
         catch (fraction_ERRORS e)
         {
@@ -87,7 +87,7 @@ void introduction()
 
 //}
 
-void getInput(istream& in, string inputfile, string savefile)
+void getInput(istream& in, string inputfile, string &savefile)
 {
     string userInput;
     string postfix;
@@ -120,10 +120,12 @@ void getInput(istream& in, string inputfile, string savefile)
 
 //void recordFile(std::string filename, std::string postfix)
 //{
-//    using namespace std;
-
 //    ofstream out;
 //    std::ifstream in;
+//    using namespace std;
+
+//    if(filename.empty())
+//        cout <<
 
 //    if(filename.find('.') > filename.size())
 //        filename += ".spt";
