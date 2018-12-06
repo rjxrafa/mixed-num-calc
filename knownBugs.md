@@ -3,3 +3,5 @@
 Functionality
 
 - Take in mixed number in mixed form e.g. 3 1/2, 4 5/8
+- account for missing parenthtesis
+- account 3 + 3

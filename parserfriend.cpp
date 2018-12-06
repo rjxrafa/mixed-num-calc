@@ -10,6 +10,7 @@ void operator>>(Parser &p, std::string& infixExpression)
 void operator<<(Parser &p, std::string& infixExpression)
 { // Insertion operator allows for insertion of strings into the parser object.
     bool debug = true;
+    int count = 0;
     p.storedExpression = infixExpression;
     if (debug) {std::cout << "Inserting '" << infixExpression << "'" << std::endl;}
 
@@ -24,11 +25,30 @@ void operator<<(Parser &p, std::string& infixExpression)
         {
             if(debug) {std::cout << temp << std::endl;}
             //if number add to queue
+
             if (temp.getType() == Operand)
-                p.tokenQ.push(temp);
+            {
+                count++;
+                if(count == 2)
+                {
+                    if(p.tokenQ.back().getValue().getNum() == 0
+                            || p.tokenQ.back().getValue().getDenom() != 1
+                            || temp.getValue().getDenom() <= temp.getValue().getNum()
+                            || temp.getValue().getNum() < 0
+                            || temp.getValue().getDenom() < 0)
+                        throw INVALIDEXPRESSION;
+                    mixedNumber sum = p.tokenQ.back().getValue();
+                    sum += temp.getValue();
+                    p.tokenQ.back().setValue(sum);
+                }
+                else
+                    p.tokenQ.push(temp);
+            }
+
             //if operator
             else if (temp.getType() == Operator)
             {
+                count = 0;
                 if(p.opStack.empty())
                     p.opStack.push(temp);
                 else
