@@ -39,7 +39,9 @@ std::istream& operator>>( std::istream &in, mixedNumber &m)
                    in.get();
                 }
                 in >> temp_mixed;
-                if ((temp_mixed.getDenom() <= temp_mixed.getNum())||(temp_mixed.getDenom() < 0)||(temp_mixed.getNum()<0))
+                if ((temp_mixed.getDenom() <= temp_mixed.getNum()) ||
+                    (temp_mixed.getDenom() < 0) ||
+                    (temp_mixed.getNum()<0))
                     throw INVALIDMIXED;
             }
 
@@ -55,4 +57,5 @@ std::istream& operator>>( std::istream &in, mixedNumber &m)
             m = (temp_whole += temp_mixed);
         return in;
         }
+    return in;
 }

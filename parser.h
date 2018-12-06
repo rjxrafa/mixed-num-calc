@@ -5,15 +5,15 @@
 #include <stack>
 #include <queue>
 
-enum parser_ERRORS { INVALIDEXPRESSION};
+enum parser_ERRORS { INVALIDEXPRESSION };
 
 class Parser
 {
     public:
         Parser();
         ~Parser();
-
-        std::string& parse(const std::string &infixExpression);
+        std::string getString() const;
+        void parse(const std::string &infixExpression);
 
         friend
         void operator>>(Parser &p, std::string& infixExpression);
