@@ -13,6 +13,7 @@ class Parser
         Parser();
         ~Parser();
         std::string getString() const;
+        void parse(const std::string &infixExpression);
 
         friend
         void operator>>(Parser &p, std::string& infixExpression);

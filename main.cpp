@@ -79,20 +79,21 @@ int main()
     while(1)
     {
         try {
-//            cout << "\nPlease enter a desired expression:" << endl;
-//            string temp;
-//            getline(cin,temp);
-//            Parser a;
-//            a << temp;
+            cout << "\nPlease enter a desired expression:" << endl;
+            string temp;
+            getline(cin,temp);
+            Parser a;
+            a << temp;
 
-            cout << "\nPlease enter a postfix expression: " << endl;
-            string temp2;
-            getline(cin, temp2);
-            Calculate b;
-            b << temp2;
+//            cout << "\nPlease enter a postfix expression: " << endl;
+//            string temp2;
+//            getline(cin, temp2);
+//            Calculate b;
+//            b << temp2;
         } catch (...) {
             cout << "\nAn unknown error has occured.";
         }
     }
+
     return 0;
 }
