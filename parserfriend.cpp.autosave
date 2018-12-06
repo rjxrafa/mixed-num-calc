@@ -1,5 +1,5 @@
 #include "parser.h"
-
+//places result in another string
 void operator>>(Parser &p, std::string& infixExpression)
 { // Extractor operator allows for extraction of stored expression into a given string.
     bool debug = true;
@@ -9,6 +9,8 @@ void operator>>(Parser &p, std::string& infixExpression)
 
 void operator<<(Parser &p, std::string& infixExpression)
 { // Insertion operator allows for insertion of strings into the parser object.
+    
+    //this is the actual parsing, we can make this it's own function
     bool debug = true;
     int count = 0;
     if (debug) {std::cout << "Inserting '" << infixExpression << "'" << std::endl;}
@@ -104,25 +106,13 @@ void operator<<(Parser &p, std::string& infixExpression)
     }
 
     ss.clear();
-    //empty string, to create new string with tokens
+    //we need to store the postfix expression into stored expression
     while(!p.tokenQ.empty())
     {
-        std::string a = "5";
-        std::string c;
-        Token b;
-        ;
-        a >> b;
-        ss << b;
-
-
-//        ss << p.tokenQ.front() << 'x';
-        getline(ss, c);
-        std::cout << c << std::endl;
-        p.storedExpression += a;
+        std::cout << p.tokenQ.front() << ' ';
         p.tokenQ.pop();
     }
-    p.storedExpression = "asdf";
-    std::cout << p.storedExpression << std::endl;
+    p.storedExpression = "";
     getline(ss, p.storedExpression);
     if(debug){std::cout << "The postfix conversion is: \n" << p.storedExpression;}
 }
