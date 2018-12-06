@@ -32,4 +32,5 @@
 *.app
 
 *.pro.user
+*.pro.user.*
 .vscode/*
