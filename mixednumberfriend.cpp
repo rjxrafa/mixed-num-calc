@@ -9,7 +9,7 @@ std::ostream& operator<<( std::ostream &out, const mixedNumber &m)
          if(whole == 0)
              out<<numerator<<"/"<<m.denom;
         else
-             out<<whole<<" "<<abs(numerator)<<"/"<<m.denom;
+             out<<whole<<char(-1)<<abs(numerator)<<"/"<<m.denom;
      return out;
 }
 

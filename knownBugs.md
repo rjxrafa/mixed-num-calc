@@ -5,3 +5,14 @@ Functionality
 - Take in mixed number in mixed form e.g. 3 1/2, 4 5/8
 - account for missing parenthtesis
 - account 3 + 3
+
+sources:
+
+https://rosettacode.org/wiki/Parsing/Shunting-yard_algorithm#C
+https://regexr.com/
+https://en.wikipedia.org/wiki/Reverse_Polish_notation
+
+
+for (int i = 0; i > -255; i--)
+    cout << i << ":" << char(i) << '_'
+        << endl;

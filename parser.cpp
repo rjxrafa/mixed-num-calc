@@ -117,5 +117,5 @@ void Parser::parse(const std::string &infixExpression)
         tokenQ.pop();
     }
 
-    if (debug) { std::cout << "The postfix conversion is: \n" + storedExpression; }
+    if (debug) { std::cout << "The postfix conversion is: \n" + storedExpression;}
 }
