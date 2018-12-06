@@ -21,7 +21,8 @@ bool operator>>(std::istream &in, Token &t)
         std::stringstream temp(s);
         temp >> t.val; // Store value
         t.type = Operand; // Change type
-        t.out = s; // Store string output
+        temp << t.val; // We store it back as a mixNum output
+        t.out = temp.str(); // Storing mixedNum string
     }
     else if (std::regex_match(s,o))
     {
@@ -52,7 +53,8 @@ bool operator>>(std::string &s, Token &t)
         std::stringstream temp(s);
         temp >> t.val; // Store value
         t.type = Operand; // Change type
-        t.out = s; // Store string output
+        temp << t.val;
+        t.out = temp.str(); // Storing mixedNum string
     }
     else if (std::regex_match(s,o))
     {
