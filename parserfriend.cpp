@@ -103,7 +103,7 @@ void operator<<(Parser &p, std::string& infixExpression)
         p.opStack.pop();
     }
 
-    std::cout << "starting output: \n";
+    std::cout << "The postfix conversion is: \n";
     while(!p.tokenQ.empty())
     {
         std::cout << p.tokenQ.front() << ' ';
