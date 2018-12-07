@@ -14,6 +14,7 @@ class Parser
         ~Parser();
         std::string getString() const;
         void parse(const std::string &infixExpression);
+        void parseCheck(); // Checks for valid expression.
 
         friend
         void operator>>(Parser &p, std::string& infixExpression);

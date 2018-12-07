@@ -3,7 +3,7 @@
 void operator>>(Calculate &c, std::string& postfixExpression)
 {
     bool debug = false;
-    if (debug) {std::cout << "Stored expression: " << c.storedExpression << std::endl;}
+    if (debug) {std::cout << "\nStored expression: " << c.storedExpression << std::endl;}
 
     postfixExpression = c.storedExpression;
 }
@@ -12,18 +12,18 @@ void operator<<(Calculate &c, std::string& postfixExpression)
 {
     bool debug = false;
     c.storedExpression = postfixExpression;
-    if(debug) {std::cout << "Calculating '" << postfixExpression << "'" << std::endl;}
+    if(debug) {std::cout << "\nCalculating '" << postfixExpression << "'" << std::endl;}
 
     std::stringstream ss(postfixExpression);
 
     while(ss >> c.storedExpression)
     {
-        if(debug) {std::cout << "stored: " << c.storedExpression << std::endl;}
+        if(debug) {std::cout << "\nStored: " << c.storedExpression << std::endl;}
         Token temp;
 
         if(c.storedExpression >> temp)
         {
-            if(debug) {std::cout << "temp: " << temp << std::endl;}
+            if(debug) {std::cout << "\nTemp: " << temp << std::endl;}
 
             if(temp.getType() == Operand)
                 c.operands.push(temp);
@@ -65,7 +65,7 @@ void operator<<(Calculate &c, std::string& postfixExpression)
     }
     while(!c.operands.empty())
     {
-        std::cout << "The evalution of this expression is: "<< c.operands.top() << ' ';
+        std::cout << "\nThe evalution of this expression is: "<< c.operands.top() << ' ';
         c.operands.pop();
     }
 }
