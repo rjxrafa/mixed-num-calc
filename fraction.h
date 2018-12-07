@@ -1,12 +1,12 @@
 #ifndef FRACTION_H
 #define FRACTION_H
+#include "error.h"
 #include <iostream>
 #include <fstream>
 #include <cmath>
 #include <sstream>
 #include <iomanip>
-
-enum fraction_ERRORS {DIVBYZERO, INVALIDFRACTION};
+#include <limits>
 
 class fraction
 {

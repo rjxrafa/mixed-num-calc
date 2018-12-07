@@ -140,7 +140,7 @@ void fraction::setValue(int n, int d) //mutator function
     num = n;
     denom = d;
     if (!denom)
-        throw DIVBYZERO;
+        throw Error("Invalid fraction. Division by zero.");
     reduce();
 }
 

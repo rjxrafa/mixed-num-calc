@@ -2,13 +2,14 @@
 #include "calculate.h"
 #include "parser.h"
 #include "token.h"
+#include "error.h"
+
 using namespace std;
 
 void introduction();
 void getInput(istream& in, string &savefile);
 void executeArguments(int argc, char*argv[]);
 void recordFile(std::string savefile, std::string postfix);
-
 
 int main(int argc, char *argv[])
 {
@@ -20,33 +21,13 @@ int main(int argc, char *argv[])
         try {
             getInput(cin, savefile);
         }
-        catch (fraction_ERRORS e)
-        {
-            switch(e)
-            {
-            case DIVBYZERO :
-                std::cout << "\nDivision by zero" << std::endl;
-                break;
-            case INVALIDFRACTION:
-                std::cout << "\nInvalid fraction was entered" << std::endl;
-                break;
-            }
-        }
-        catch (mixedNumber_ERRORS f)
-        {
-            switch(f)
-            {
-            case INVALIDMIXED :
-                std::cout << "\nImproper Mixed Number" << std::endl;
-                break;
-            }
+        catch (exception &e) {
+            cout << std::endl << e.what() << std::endl;
         }
         catch (...) {
-            cout << "\nAn unknown error has occured." << std::endl;
+            cout << std::endl << "An unknown error has occured." << std::endl;
         }
     }
-
-    return 0;
 }
 
 void introduction()

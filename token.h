@@ -3,7 +3,7 @@
 #include "mixednumber.h"
 #include <stack>
 
-enum Type {  None, Operator, Operand, Parenthesis };
+enum Type { None, Operator, Operand, Parenthesis };
 
 class Token
 {

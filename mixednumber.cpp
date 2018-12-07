@@ -13,7 +13,7 @@ mixedNumber::mixedNumber(int w, int n, int d)
 {
     setValues(w,n,d);
 }
-//Fix for taking in double to mixed number
+
 mixedNumber::mixedNumber(const double &other)
 {
     //converts it to temp
@@ -34,14 +34,12 @@ mixedNumber& mixedNumber::operator=(const mixedNumber &other)
     return *this;
 }
 
-
 mixedNumber& mixedNumber::operator=(const fraction &other)
 {
     num = other.getNum();
     denom = other.getDenom();
     return *this;
 }
-
 
 mixedNumber& mixedNumber::operator=(const int &other)
 {
@@ -66,7 +64,7 @@ void mixedNumber::getValues(int &w, int &n, int &d)
 
 mixedNumber mixedNumber::abs() const
 {
-    int tempnum;
+    int tempnum = 0;
     mixedNumber temp;
     if(this->getNum() < 0 || this->getDenom() < 0)
         tempnum = this->getNum() * -1;
@@ -74,11 +72,11 @@ mixedNumber mixedNumber::abs() const
     temp.denom = this->getDenom();
     return temp;
 }
+
 void mixedNumber::setValues(int w, int n, int d)
 {
     if (w < 0)
         d *= -1;
-
     fraction::setValue(w*d + n, d);
 }
 

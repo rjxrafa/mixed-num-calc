@@ -1,5 +1,5 @@
 #include "parser.h"
-#include <string>
+
 Parser::Parser()
 {
 
@@ -45,7 +45,7 @@ void Parser::parse(const std::string &infixExpression)
                             || temp.getValue().getDenom() <= temp.getValue().getNum()
                             || temp.getValue().getNum() < 0
                             || temp.getValue().getDenom() < 0)
-                        throw INVALIDEXPRESSION;
+                        throw Error("Invalid expression!"); // We could potentially throw an error for each of these.
                     if(tokenQ.back().getValue() < 0)
                     {
                         mixedNumber fix = temp.getValue();
@@ -57,7 +57,7 @@ void Parser::parse(const std::string &infixExpression)
                     tokenQ.back().setValue(sum);
                 }
                 else if (count > 2) {
-                    throw INVALIDEXPRESSION;
+                    throw Error("Invalid expression!");
                 }
                 else
                     tokenQ.push(temp);
@@ -109,7 +109,7 @@ void Parser::parse(const std::string &infixExpression)
             }
         }
         else
-            throw INVALIDEXPRESSION;
+            throw Error("Invalid Expression!");
     }
 
     while(!opStack.empty())
@@ -131,7 +131,7 @@ void Parser::parse(const std::string &infixExpression)
 
 void Parser::parseCheck() // Checks for valid expression.
 {
-    bool debug = true;
+    bool debug = false;
     int operatorCt(0), operandCt(0);
 
     for (int i = 0; i < tokenQ.size(); ++i) // This takes an inventory of all the tokens in the current queue
@@ -144,24 +144,28 @@ void Parser::parseCheck() // Checks for valid expression.
         tokenQ.pop();
     }
 
-    if (debug)
-    {
-        std::cout  << "\noperandCt: " << operandCt
-                    << "\noperatorCt: " << operatorCt << std::endl;
-    }
+    if (debug) { std::cout  << "\noperandCt: " << operandCt << "\noperatorCt: " << operatorCt << std::endl;}
 
     if (operatorCt < 1 || operandCt < 2 || (operandCt-1) != operatorCt)
     {
-        if (debug)
         {
             if (operatorCt < 1)
-                std::cout << "\nNot enough operators";
+            {
+                if (debug) { std::cout << "\nNot enough operators"; }
+                throw Error("Not enough operators.");
+            }
             if (operandCt < 2)
-                std::cout << "\nNot enough operands";
+            {
+                if (debug) { std::cout << "\nNot enough operands"; }
+                throw Error("Not enough operands.");
+            }
             if ((operandCt-1) != operatorCt)
-                std::cout << "\nInvalid expression";
+            {
+                if (debug) { std::cout << "\nInvalid expression"; }
+                throw Error("Invalid expression!");
+            }
         }
-        throw INVALIDEXPRESSION;
+
     }
 
 }
