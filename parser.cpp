@@ -41,10 +41,10 @@ void Parser::parse(const std::string &infixExpression)
                 if(count == 2)
                 {
                     if(tokenQ.back().getValue().getNum() == 0
-                            || tokenQ.back().getValue().getDenom() != 1
-                            || temp.getValue().getDenom() <= temp.getValue().getNum()
-                            || temp.getValue().getNum() < 0
-                            || temp.getValue().getDenom() < 0)
+                    || tokenQ.back().getValue().getDenom() != 1
+                    || temp.getValue().getDenom() <= temp.getValue().getNum()
+                    || temp.getValue().getNum() < 0
+                    || temp.getValue().getDenom() < 0)
                         throw Error("Invalid expression!"); // We could potentially throw an error for each of these.
                     if(tokenQ.back().getValue() < 0)
                     {

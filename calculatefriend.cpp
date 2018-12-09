@@ -4,7 +4,6 @@ void operator>>(Calculate &c, std::string& postfixExpression)
 {
     bool debug = false;
     if (debug) {std::cout << "\nStored expression: " << c.storedExpression << std::endl;}
-
     postfixExpression = c.storedExpression;
 }
 

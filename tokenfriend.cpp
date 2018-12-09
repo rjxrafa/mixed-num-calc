@@ -2,15 +2,16 @@
 #include <regex>
 
 bool operator>>(std::istream &in, Token &t)
-{  // This operator will only receive one token at a time. Parser class should handle multiple tokens.
+{   // This operator will only receive one token at a time. Parser class should handle multiple tokens.
     // Usig regex, we check for a mixedNum match. Else we check for operator match.
 
+    // MixedNum pattern
     std::regex m ("(((\\+|\\-)?(\\d+)((/\\d+)|(\\.\\d+)|(\\s\\d+/\\d+))?)|(\\+|\\-)?(\\.\\d+))");
     //+-optional, d+ more than one digit, | allows variations
     // / for fraciton, . for decimal, s stands for whitespace, this allows us for mixed number. ? means optional
 
-    // MixedNum search
-    std::regex o ("[-*\\+/\\(\\)]"); // Operator search
+    // Operator pattern
+    std::regex o ("[-*\\+/\\(\\)]");
 
     std::string s;
     getline(in,s);
@@ -44,8 +45,8 @@ bool operator>>(std::istream &in, Token &t)
 
 bool operator>>(std::string &s, Token &t)
 { // This overloaded operator will allow us to build tokens from strings
-    std::regex m ("(((\\+|\\-)?(\\d+)((/\\d+)|(\\.\\d+)|(\\s\\d+/\\d+))?)|(\\+|\\-)?(\\.\\d+))");
-    std::regex o ("[-*\\+/\\(\\)]"); // Operator search
+    std::regex m ("(((\\+|\\-)?(\\d+)((/\\d+)|(\\.\\d+)|(\\s\\d+/\\d+))?)|(\\+|\\-)?(\\.\\d+))"); // MixedNum pattern
+    std::regex o ("[-*\\+/\\(\\)]"); // Operator pattern
 
     // If string matches our regex, it is a fraction
     if (std::regex_match(s, m))
