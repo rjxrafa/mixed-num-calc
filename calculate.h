@@ -3,6 +3,7 @@
 #include "parser.h"
 #include <string>
 #include <stack>
+#include <map>
 
 class Calculate
 {
@@ -19,7 +20,7 @@ class Calculate
    private:
         std::string storedExpression = "";
         std::stack<Token> operators;
-        std::stack<Token> operands;
+        std::stack<Token> operands;        
 };
 
 #endif // CALCULATE_H

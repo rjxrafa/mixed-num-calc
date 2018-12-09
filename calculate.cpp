@@ -10,3 +10,7 @@ Calculate::~Calculate()
 
 }
 
+void Calculate::initOperatorMap()
+{
+
+}

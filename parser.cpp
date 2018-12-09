@@ -115,7 +115,7 @@ void Parser::parse(const std::string &infixExpression)
             throw Error("Invalid Expression!");
     }
 
-    while(!opStack.empty())
+    while(!opStack.empty()) // Checks for mismatched parenthesis
     {
         if(opStack.top().getString() == "(")
             throw Error("Mismatched Parenthesis");
@@ -153,7 +153,7 @@ void Parser::parseCheck() // Checks for valid expression.
 
     if (operatorCt < 1 || operandCt < 2 || (operandCt-1) != operatorCt)
     {
-        {
+        { // checks for cases of improper expressions
             if (operatorCt < 1)
             {
                 if (debug) { std::cout << "\nNot enough operators"; }

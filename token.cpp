@@ -6,20 +6,20 @@ Token::Token()
 }
 
 Token::~Token()
-{
+{ // Nuke everyone
     val = 0;
     out = "";
     type = None;
 }
 
 void Token::setValue(const mixedNumber &m)
-{
+{ // Sets the internal value of the token (if applicable)
     type = Operand;
     val  = m;
 }
 
 void Token::setPrecedence()
-{
+{ // Sets precendece for a given token.
     switch(out[0])
     {
         case '/':
