@@ -5,8 +5,6 @@
 #include <map>
 #include "fraction.h"
 
-enum mixedNumber_ERRORS {INVALIDMIXED};
-
 class mixedNumber : public fraction
 {
     public:

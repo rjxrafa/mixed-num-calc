@@ -1,6 +1,5 @@
 #include "parser.h"
-#include <string>
-using namespace std;
+
 Parser::Parser()
 {
 
@@ -20,13 +19,15 @@ void Parser::parse(const std::string &infixExpression)
 {
     bool debug = false;
     int count = 0; // Count keeps track of a token count based on type of token
+    int leftParen(0), rightParen(0);
+
     // Used for checking for mixed numbers and invalid operators
     std::stringstream ss(infixExpression);
 
     std::string token;
     while (ss >> token)
     {
-        if (debug) {std::cout << "stored: " << token << std::endl;}
+        if (debug) {std::cout << "\nStored token: " << token << std::endl;}
         Token temp;
         // Grabs a token
         if(token >> temp)
@@ -44,7 +45,7 @@ void Parser::parse(const std::string &infixExpression)
                             || temp.getValue().getDenom() <= temp.getValue().getNum()
                             || temp.getValue().getNum() < 0
                             || temp.getValue().getDenom() < 0)
-                        throw INVALIDEXPRESSION;
+                        throw Error("Invalid expression!"); // We could potentially throw an error for each of these.
                     if(tokenQ.back().getValue() < 0)
                     {
                         mixedNumber fix = temp.getValue();
@@ -54,6 +55,9 @@ void Parser::parse(const std::string &infixExpression)
                     mixedNumber sum = tokenQ.back().getValue();
                     sum += temp.getValue();
                     tokenQ.back().setValue(sum);
+                }
+                else if (count > 2) {
+                    throw Error("Invalid expression!");
                 }
                 else
                     tokenQ.push(temp);
@@ -84,7 +88,10 @@ void Parser::parse(const std::string &infixExpression)
             {
                 //if token is left bracket, push it onto the op stack
                 if(temp.getString() == "(")
+                {
                     opStack.push(temp);
+                    leftParen++;
+                }
                 else if(temp.getString() == ")")
                 {
                     //while the operator at the top of the op stack is not a left bracked
@@ -98,18 +105,25 @@ void Parser::parse(const std::string &infixExpression)
                     {
                         opStack.pop();
                     }
+                    else
+                        throw Error("Mismatched Parenthesis");
+
                  }
             }
         }
         else
-            throw INVALIDEXPRESSION;
+            throw Error("Invalid Expression!");
     }
 
     while(!opStack.empty())
     {
+        if(opStack.top().getString() == "(")
+            throw Error("Mismatched Parenthesis");
         tokenQ.push(opStack.top());
         opStack.pop();
     }
+
+    parseCheck(); // Checks for invalid expressions
 
     while(!tokenQ.empty())
     {
@@ -118,4 +132,45 @@ void Parser::parse(const std::string &infixExpression)
     }
 
     if (debug) { std::cout << "The postfix conversion is: \n" + storedExpression;}
+}
+
+void Parser::parseCheck() // Checks for valid expression.
+{
+    bool debug = false;
+    int operatorCt(0), operandCt(0);
+
+    for (int i = 0; i < tokenQ.size(); ++i) // This takes an inventory of all the tokens in the current queue
+    {
+        if (tokenQ.front().getType() == Operand)
+            operandCt++;
+        else if (tokenQ.front().getType() == Operator)
+            operatorCt++;
+        tokenQ.push(tokenQ.front());
+        tokenQ.pop();
+    }
+
+    if (debug) { std::cout  << "\noperandCt: " << operandCt << "\noperatorCt: " << operatorCt << std::endl;}
+
+    if (operatorCt < 1 || operandCt < 2 || (operandCt-1) != operatorCt)
+    {
+        {
+            if (operatorCt < 1)
+            {
+                if (debug) { std::cout << "\nNot enough operators"; }
+                throw Error("Not enough operators.");
+            }
+            if (operandCt < 2)
+            {
+                if (debug) { std::cout << "\nNot enough operands"; }
+                throw Error("Not enough operands.");
+            }
+            if ((operandCt-1) != operatorCt)
+            {
+                if (debug) { std::cout << "\nInvalid expression"; }
+                throw Error("Invalid expression!");
+            }
+        }
+
+    }
+
 }

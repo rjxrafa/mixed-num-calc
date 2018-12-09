@@ -1,6 +1,4 @@
 #include "fraction.h"
-#include <cmath>
-#include <limits>
 
 std::ostream& operator<<(std::ostream& out, const fraction &frac)
 {
@@ -20,7 +18,7 @@ std::istream& operator>>(std::istream& in, fraction &frac)
         if(in>>possibleFraction)
         {
             if(possibleFraction.find_first_not_of("-+0123456789./") < possibleFraction.size())
-                throw INVALIDFRACTION;
+                throw Error("Invalid fraction input.");
             ss<<possibleFraction;
             ss>>frac;
         }
@@ -39,7 +37,7 @@ std::istream& operator>>(std::istream& in, fraction &frac)
         {
             double temp;
             if (!(in >> temp))
-                throw INVALIDFRACTION;
+                throw Error("Invalid fraction input.");
 
             temp = temp + frac.num;
 
@@ -51,7 +49,7 @@ std::istream& operator>>(std::istream& in, fraction &frac)
             frac.reduce();
         }
         else if (!(in>>frac.num))
-            throw INVALIDFRACTION;
+            throw Error("Invalid fraction input.");
         else{
             if (in.peek() == '/')
             {
@@ -59,15 +57,15 @@ std::istream& operator>>(std::istream& in, fraction &frac)
                     frac.num *= -1;
                 in >> junk;
                 if (!(in>>frac.denom))
-                    throw INVALIDFRACTION;
+                    throw Error("Invalid fraction input.");
                 if (frac.denom == 0)
-                    throw DIVBYZERO;
+                    throw Error("Invalid fraction input. Division by zero.");
                 frac.reduce();
             } else if (in.peek() == '.') // Example "0.5"
             {
                 double temp;
                 if (!(in >> temp))
-                    throw INVALIDFRACTION;
+                    throw Error("Invalid fraction input.");
 
                 temp = temp + frac.num;
 
@@ -105,7 +103,7 @@ fraction operator-(const fraction &x,const fraction &y)
     unsigned int temp2 = y.num*x.denom;
 
     unsigned int num = temp1 - temp2,
-        denom = x.denom * y.denom;
+                  denom = x.denom * y.denom;
     result.setValue(num,denom);
     return result;
 }
@@ -137,7 +135,7 @@ fraction operator^(const fraction &x,const fraction &y)
 
 fraction fraction::squareRoot() const
 {
-    //babylonian algorithm
+// babylonian algorithm
 //    fraction temp, r, preGuess;
 
 //    temp = *this;

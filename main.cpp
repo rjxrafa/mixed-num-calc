@@ -2,14 +2,14 @@
 #include "calculate.h"
 #include "parser.h"
 #include "token.h"
-#include <regex>
+#include "error.h"
+
 using namespace std;
 
 void introduction();
 void getInput(istream& in, string &savefile);
 void executeArguments(int argc, char*argv[]);
 void recordFile(std::string savefile, std::string postfix);
-
 
 int main(int argc, char *argv[])
 {
@@ -21,47 +21,18 @@ int main(int argc, char *argv[])
         try {
             getInput(cin, savefile);
         }
-        catch (fraction_ERRORS e)
-        {
-            switch(e)
-            {
-            case DIVBYZERO :
-                std::cout << "Division by zero" << std::endl;
-                break;
-            case INVALIDFRACTION:
-                std::cout << "Invalid fraction was entered" << std::endl;
-                break;
-            }
-        }
-        catch (mixedNumber_ERRORS f)
-        {
-            switch(f)
-            {
-            case INVALIDMIXED :
-                std::cout << "Improper Mixed Number" << std::endl;
-                break;
-            }
-        }
-        catch (parser_ERRORS g)
-        {
-            switch(g)
-            {
-            case INVALIDEXPRESSION :
-                std::cout << "Invalid Expression Entered" << std::endl;
-                break;
-            }
+        catch (exception &e) {
+            cout << std::endl << e.what() << std::endl;
         }
         catch (...) {
-            cout << "\nAn unknown error has occured.";
+            cout << std::endl << "An unknown error has occured." << std::endl;
         }
     }
-
-    return 0;
 }
 
 void introduction()
 {
-    string border(80, '*');
+    string border(60, '*');
 
     cout << border << endl;
     cout << "This Program is called ." << endl;
@@ -72,14 +43,12 @@ void executeArguments(int argc, char*argv[])
 {
     if (argc == 2)
     {
-        ifstream in;
-        ifstream in2;
+        ifstream in, in2;
         ofstream out;
-        string inputfile;
-        string savefile;
+        string inputfile, savefile;
         char ans;
 
-        inputfile= argv[1];
+        inputfile = argv[1];
         if(inputfile.find('.') > inputfile.size())
             inputfile+= ".spt";
         in.open(inputfile);
@@ -153,7 +122,7 @@ void getInput(istream& in, string &savefile)
     getline(in,userInput);
     if(userInput.empty())
     {
-        std::cout << "SEE YA!" <<std::endl;
+        std::cout << "\nSEE YA!" <<std::endl;
         std::exit(1);
     }
 
@@ -161,7 +130,7 @@ void getInput(istream& in, string &savefile)
     a >> postfix;
 
     if(&in == &cin)
-        cout << "your postfix expression is " << postfix << endl;
+        cout << "\nYour postfix expression is " << postfix << std::endl;
     else
         recordFile(savefile, postfix);
 

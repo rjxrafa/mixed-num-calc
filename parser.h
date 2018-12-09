@@ -2,10 +2,9 @@
 #define PARSER_H
 #include "mixednumber.h"
 #include "token.h"
+#include "error.h"
 #include <stack>
 #include <queue>
-
-enum parser_ERRORS { INVALIDEXPRESSION };
 
 class Parser
 {
@@ -14,6 +13,7 @@ class Parser
         ~Parser();
         std::string getString() const;
         void parse(const std::string &infixExpression);
+        void parseCheck(); // Checks for valid expression.
 
         friend
         void operator>>(Parser &p, std::string& infixExpression);

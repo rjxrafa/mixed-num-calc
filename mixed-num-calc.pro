@@ -26,4 +26,5 @@ HEADERS += \
     mixednumber.h \
     parser.h \
     token.h \
-    calculate.h
+    calculate.h \
+    error.h
