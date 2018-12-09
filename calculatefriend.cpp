@@ -10,17 +10,30 @@ void operator>>(Calculate &c, std::string& postfixExpression)
 void operator<<(Calculate &c, std::string& postfixExpression)
 {
     bool debug = false;
-    c.storedExpression = postfixExpression;
+    std::string token;
     if(debug) {std::cout << "\nCalculating '" << postfixExpression << "'" << std::endl;}
 
-    std::stringstream ss(postfixExpression);
 
-    while(ss >> c.storedExpression)
+    std::stringstream ss(postfixExpression);
+    std::stringstream aa;
+
+    while(ss >> token)
     {
         if(debug) {std::cout << "\nStored: " << c.storedExpression << std::endl;}
         Token temp;
 
-        if(c.storedExpression >> temp)
+        if(token.find_first_of('\0') < token.size())
+        {
+            token[token.find_first_of('\0')] = ' ';
+            mixedNumber a ,b,c;
+            aa.clear();
+            aa >> token;
+            aa << a;
+            aa << b;
+            c = a + b;
+            temp.setValue(c);
+        }
+        if(token >> temp || temp.getString() != "")
         {
             if(debug) {std::cout << "\nTemp: " << temp << std::endl;}
 
@@ -64,7 +77,8 @@ void operator<<(Calculate &c, std::string& postfixExpression)
     }
     while(!c.operands.empty())
     {
-        std::cout << "\nThe evalution of this expression is: "<< c.operands.top() << ' ';
+        std::cout << "= "<< c.operands.top() << ' ';
         c.operands.pop();
     }
+    std::cout << std::endl<< std::endl;
 }

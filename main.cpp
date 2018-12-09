@@ -7,6 +7,7 @@
 using namespace std;
 
 void introduction();
+//short description
 void getInput(istream& in, string &savefile);
 void executeArguments(int argc, char*argv[]);
 void recordFile(std::string savefile, std::string postfix);
@@ -35,7 +36,8 @@ void introduction()
     string border(60, '*');
 
     cout << border << endl;
-    cout << "This Program is called ." << endl;
+    cout << "This Program is a Mixed Number Calculator." << endl;
+    cout << "It takes in an arbitrary length infix expression and outputs its postfix counterpart, as well as its evalutation." << endl;
     cout << border << endl;
 }
 
@@ -108,11 +110,15 @@ void executeArguments(int argc, char*argv[])
 
 void getInput(istream& in, string &savefile)
 {
+    Parser a;
+    Calculate b;
     string userInput;
     string postfix;
+    string evaluation;
+
     if(&in == &cin)
     {
-        cout << "\nPlease enter a desired expression:" << endl;
+        cout << "EXPRESSION: ";
 
     }
     getline(in,userInput);
@@ -121,20 +127,18 @@ void getInput(istream& in, string &savefile)
         std::cout << "\nSEE YA!" <<std::endl;
         std::exit(1);
     }
-    Parser a;
+
+    cout << "RPN & EVALUATION: ";
+
     a << userInput;
     a >> postfix;
 
     if(&in == &cin)
-        cout << "\nYour postfix expression is " << postfix << std::endl;
+        cout << postfix;
     else
         recordFile(savefile, postfix);
 
-//        cout << "\nPlease enter a postfix expression: " << endl;
-//        string temp2;
-//        getline(cin, temp2);
-//        Calculate b;
-//        b << temp2;
+    b << postfix;
 }
 
 void recordFile(std::string savefile, std::string postfix)

@@ -105,6 +105,9 @@ void Parser::parse(const std::string &infixExpression)
                     {
                         opStack.pop();
                     }
+                    else
+                        throw Error("Mismatched Parenthesis");
+
                  }
             }
         }
@@ -114,6 +117,8 @@ void Parser::parse(const std::string &infixExpression)
 
     while(!opStack.empty())
     {
+        if(opStack.top().getString() == "(")
+            throw Error("Mismatched Parenthesis");
         tokenQ.push(opStack.top());
         opStack.pop();
     }

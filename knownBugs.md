@@ -1,9 +1,24 @@
+
+- if (isdigit(temp[0])) // *BUG*: Will be unable to take in decimals that start with . (e.g. .5)
+
+Functionality
+
+- Take in mixed number in mixed form e.g. 3 1/2, 4 5/8
+- doesn't convert decimals to mixedNumber
+- account for missing parenthtesis
+- account 3 + 3
+- if we add more than 1
+
+parser works with mixed in the form of fractions and integers.
+needs to work with decimals (0.5, .5) and mixed numbers (3 1/2).
+
 - Parenthesis problem:
     - We need to consider issues like parenthesis mismatch (each paren has to come with pairs)
     - We need to make sure there is a valid input within the parenthesis (correct expression in paren)
     - invalid inputs such as ') ('
     - 2 + 2 (
     - 2 + 2 )
+
 
 sources:
 
