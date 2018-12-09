@@ -78,7 +78,8 @@ void operator<<(Calculate &c, std::string& postfixExpression)
     }
     while(!c.operands.empty())
     {
-        std::cout << "\nThe evalution of this expression is: "<< c.operands.top() << ' ';
+        std::cout << "= "<< c.operands.top() << ' ';
         c.operands.pop();
     }
+    std::cout << std::endl<< std::endl;
 }
