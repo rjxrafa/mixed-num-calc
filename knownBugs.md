@@ -6,6 +6,7 @@ Functionality
 - doesn't convert decimals to mixedNumber
 - account for missing parenthtesis
 - account 3 + 3
+- if we add more than 1
 
 parser works with mixed in the form of fractions and integers.
 needs to work with decimals (0.5, .5) and mixed numbers (3 1/2).

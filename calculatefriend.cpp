@@ -11,19 +11,32 @@ void operator>>(Calculate &c, std::string& postfixExpression)
 void operator<<(Calculate &c, std::string& postfixExpression)
 {
     bool debug = false;
-    c.storedExpression = postfixExpression;
+    std::string token;
     if(debug) {std::cout << "Calculating '" << postfixExpression << "'" << std::endl;}
 
     std::stringstream ss(postfixExpression);
+    std::stringstream aa;
 
-    while(ss >> c.storedExpression)
+    while(ss >> token)
     {
         if(debug) {std::cout << "stored: " << c.storedExpression << std::endl;}
         Token temp;
 
-        if(c.storedExpression >> temp)
+        if(token.find_first_of('\0') < token.size())
+        {
+            token[token.find_first_of('\0')] = ' ';
+            mixedNumber a ,b,c;
+            aa.clear();
+            aa >> token;
+            aa << a;
+            aa << b;
+            c = a + b;
+            temp.setValue(c);
+        }
+        if(token >> temp || temp.getString() != "")
         {
             if(debug) {std::cout << "temp: " << temp << std::endl;}
+//            if()
 
             if(temp.getType() == Operand)
                 c.operands.push(temp);
